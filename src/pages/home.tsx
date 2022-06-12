@@ -1,3 +1,4 @@
+import { Button, Stack } from "@mui/material";
 import { useState } from "react";
 import { PersonItem } from "../components/person-item";
 import { useAllPersons } from "../hooks/use-all-persons.hook";
@@ -23,21 +24,27 @@ export const HomePage = () => {
 
     return (
         <div>
-            <div>
-                <button disabled={!persons.previous} onClick={goToPrevious}>
+            <Stack direction="row" spacing={2} marginBottom={2}>
+                <Button
+                    variant="contained"
+                    disabled={!persons.previous}
+                    onClick={goToPrevious}
+                >
                     Previous
-                </button>
-                <button disabled={!persons.next} onClick={goToNext}>
+                </Button>
+                <Button
+                    variant="contained"
+                    disabled={!persons.next}
+                    onClick={goToNext}
+                >
                     Next
-                </button>
-            </div>
-            <ul>
+                </Button>
+            </Stack>
+            <Stack direction={{ xs: "column", sm: "row" }}>
                 {persons?.results.map((person) => (
-                    <li key={person.name}>
-                        <PersonItem info={person} />
-                    </li>
+                    <PersonItem key={person.name} info={person} />
                 ))}
-            </ul>
+            </Stack>
         </div>
     );
 };

@@ -1,22 +1,27 @@
 import "./App.css";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link as RouterLink, Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages/home";
 import { PersonPage } from "./pages/person";
 import { StarShipPage } from "./pages/star-ship";
+import { Box, Link } from "@mui/material";
 
 function App() {
     return (
         <>
             <ul>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link component={RouterLink} to="/">
+                        Home
+                    </Link>
                 </li>
             </ul>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/person" element={<PersonPage />} />
-                <Route path="starship" element={<StarShipPage />} />
-            </Routes>
+            <Box margin={4}>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/person" element={<PersonPage />} />
+                    <Route path="starship" element={<StarShipPage />} />
+                </Routes>
+            </Box>
         </>
     );
 }

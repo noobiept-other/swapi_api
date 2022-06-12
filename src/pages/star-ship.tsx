@@ -1,4 +1,5 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "@mui/material";
+import { Link as RouterLink, useSearchParams } from "react-router-dom";
 import { useStarShip } from "../hooks/use-star-ship.hook";
 
 export const StarShipPage = () => {
@@ -20,7 +21,10 @@ export const StarShipPage = () => {
             <ul>
                 {pilots?.map((pilot) => (
                     <li key={pilot.url}>
-                        <Link to={`/person?url=${pilot.url}`}>
+                        <Link
+                            component={RouterLink}
+                            to={`/person?url=${pilot.url}`}
+                        >
                             {pilot.name}
                         </Link>
                     </li>
