@@ -1,21 +1,21 @@
-import React from "react";
 import "./App.css";
-import { useAllPersons } from "./hooks/use-person.hook";
-import { Person } from "./components/person";
+import { Link, Route, Routes } from "react-router-dom";
+import { HomePage } from "./pages/home";
+import { PersonPage } from "./pages/person";
 
 function App() {
-    const persons = useAllPersons();
-
     return (
-        <div>
+        <>
             <ul>
-                {persons?.results.map((person) => (
-                    <li key={person.name}>
-                        <Person info={person} />
-                    </li>
-                ))}
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
             </ul>
-        </div>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/person" element={<PersonPage />} />
+            </Routes>
+        </>
     );
 }
 
