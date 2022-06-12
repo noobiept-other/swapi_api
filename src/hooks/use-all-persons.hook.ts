@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { AllPersonsResponse } from "../types";
-import { BASE_URL } from "./utils";
 
-export const useAllPersons = () => {
+export const useAllPersons = (url: string) => {
     const [data, setData] = useState<AllPersonsResponse>();
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(BASE_URL + "people");
+            const response = await fetch(url);
             const json = await response.json();
 
             setData(json);
@@ -18,7 +17,7 @@ export const useAllPersons = () => {
         } catch (e) {
             console.log(e);
         }
-    }, []);
+    }, [url]);
 
     return data;
 };
