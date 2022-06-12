@@ -3,7 +3,7 @@ export interface StarshipInfo {
     model: string;
     manufacturer: string;
     starship_class: string;
-    pilots: PersonInfo[];
+    pilots: string[];
     url: string;
 }
 

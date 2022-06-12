@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { usePerson } from "../hooks/use-person.hook";
 
 export const PersonPage = () => {
@@ -14,9 +14,15 @@ export const PersonPage = () => {
     return (
         <div>
             {person.name} / {person.height}
-            {personData.starships.map((item) => (
-                <div key={item.url}>{item.name}</div>
-            ))}
+            <ul>
+                {personData.starships.map((item) => (
+                    <li key={item.url}>
+                        <Link to={`/starship?url=${item.url}`}>
+                            {item.name}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
