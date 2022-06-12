@@ -4,12 +4,13 @@ export interface StarshipInfo {
     manufacturer: string;
     starship_class: string;
     pilots: PersonInfo[];
+    url: string;
 }
 
 export interface PersonInfo {
     name: string;
     height: string;
-    starships: StarshipInfo[];
+    starships: string[];
     url: string;
 }
 

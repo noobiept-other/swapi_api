@@ -1,24 +1,58 @@
 import { useEffect, useState } from "react";
-import { AllPersonsResponse } from "../types";
-import { BASE_URL } from "./utils";
+import { PersonInfo, StarshipInfo } from "../types";
 
-export const useAllPersons = () => {
-    const [data, setData] = useState<AllPersonsResponse>();
+export interface UsePersonArgs {
+    url: string | null;
+}
+
+export const usePerson = ({ url }: UsePersonArgs) => {
+    const [person, setPerson] = useState<PersonInfo>();
+    const [starships, setStarships] = useState<StarshipInfo[]>([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(BASE_URL + "people");
-            const json = await response.json();
+        if (!url) {
+            return;
+        }
 
-            setData(json);
+        const fetchPerson = async () => {
+            const response = await fetch(url);
+            const json = (await response.json()) as PersonInfo;
+
+            setPerson(json);
         };
 
         try {
-            fetchData();
+            fetchPerson();
         } catch (e) {
             console.log(e);
         }
-    }, []);
+    }, [url]);
 
-    return data;
+    useEffect(() => {
+        const fetchStarship = async (shipUrls: string[]) => {
+            const responses = await Promise.all(
+                shipUrls.map((url) => fetch(url))
+            );
+            const jsonList = await Promise.all(
+                responses.map(async (item) => await item.json())
+            );
+
+            setStarships(jsonList as unknown as StarshipInfo[]);
+        };
+
+        try {
+            if (!person?.starships) {
+                return;
+            }
+
+            fetchStarship(person?.starships);
+        } catch (e) {
+            console.log(e);
+        }
+    }, [person]);
+
+    return {
+        person,
+        starships,
+    };
 };

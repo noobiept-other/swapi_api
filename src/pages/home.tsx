@@ -1,5 +1,5 @@
 import { PersonItem } from "../components/person-item";
-import { useAllPersons } from "../hooks/use-person.hook";
+import { useAllPersons } from "../hooks/use-all-persons.hook";
 
 export const HomePage = () => {
     const persons = useAllPersons();
