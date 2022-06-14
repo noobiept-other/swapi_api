@@ -22,19 +22,23 @@ export const PersonPage = () => {
                 </Typography>
             </div>
             <div>Height: {person.height}</div>
-            <div>Starships:</div>
-            <ul>
-                {personData.starships.map((item) => (
-                    <li key={item.url}>
-                        <Link
-                            component={RouterLink}
-                            to={constructStarshipUrl(item.url)}
-                        >
-                            {item.name}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            {personData.starships.length > 0 && (
+                <>
+                    <div>Starships:</div>
+                    <ul>
+                        {personData.starships.map((item) => (
+                            <li key={item.url}>
+                                <Link
+                                    component={RouterLink}
+                                    to={constructStarshipUrl(item.url)}
+                                >
+                                    {item.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
         </Card>
     );
 };
