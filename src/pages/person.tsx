@@ -1,11 +1,12 @@
 import { Link } from "@mui/material";
 import { Link as RouterLink, useSearchParams } from "react-router-dom";
 import { usePerson } from "../hooks/use-person.hook";
+import { constructStarshipUrl } from "../utils";
 
 export const PersonPage = () => {
     const [searchParams] = useSearchParams();
-    const url = searchParams.get("url");
-    const personData = usePerson({ url });
+    const id = searchParams.get("id");
+    const personData = usePerson({ id });
     const person = personData?.person;
 
     if (!person) {
@@ -20,7 +21,7 @@ export const PersonPage = () => {
                     <li key={item.url}>
                         <Link
                             component={RouterLink}
-                            to={`/starship?url=${item.url}`}
+                            to={constructStarshipUrl(item.url)}
                         >
                             {item.name}
                         </Link>

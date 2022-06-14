@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import { PersonInfo, StarshipInfo } from "../types";
+import { toStarshipUrl } from "../utils";
 
 export interface UseStarShipArgs {
-    url: string | null;
+    id: string | null;
 }
 
-export const useStarShip = ({ url }: UseStarShipArgs) => {
+export const useStarShip = ({ id }: UseStarShipArgs) => {
     const [ship, setShip] = useState<StarshipInfo>();
     const [pilots, setPilots] = useState<PersonInfo[]>();
 
     useEffect(() => {
-        if (!url) {
+        if (!id) {
             return;
         }
 
         const fetchShip = async () => {
-            const response = await fetch(url);
+            const response = await fetch(toStarshipUrl(id));
             const json = await response.json();
 
             setShip(json);
@@ -26,7 +27,7 @@ export const useStarShip = ({ url }: UseStarShipArgs) => {
         } catch (e) {
             console.log(e);
         }
-    }, [url]);
+    }, [id]);
 
     useEffect(() => {
         const fetchStarship = async (pilotsUrls: string[]) => {

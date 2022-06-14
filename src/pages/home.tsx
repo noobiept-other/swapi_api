@@ -2,10 +2,10 @@ import { Button, Stack } from "@mui/material";
 import { useState } from "react";
 import { PersonItem } from "../components/person-item";
 import { useAllPersons } from "../hooks/use-all-persons.hook";
-import { PEOPLE_URL } from "../hooks/utils";
+import { toPeopleUrl } from "../utils";
 
 export const HomePage = () => {
-    const [url, setUrl] = useState(PEOPLE_URL);
+    const [url, setUrl] = useState(toPeopleUrl());
     const persons = useAllPersons(url);
     const goToPrevious = () => {
         if (persons?.previous) {

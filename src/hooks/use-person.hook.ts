@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import { PersonInfo, StarshipInfo } from "../types";
+import { toPeopleUrl } from "../utils";
 
 export interface UsePersonArgs {
-    url: string | null;
+    id: string | null;
 }
 
-export const usePerson = ({ url }: UsePersonArgs) => {
+export const usePerson = ({ id }: UsePersonArgs) => {
     const [person, setPerson] = useState<PersonInfo>();
     const [starships, setStarships] = useState<StarshipInfo[]>([]);
 
     useEffect(() => {
-        if (!url) {
+        if (!id) {
             return;
         }
 
         const fetchPerson = async () => {
-            const response = await fetch(url);
+            const response = await fetch(toPeopleUrl(id));
             const json = (await response.json()) as PersonInfo;
 
             setPerson(json);
@@ -26,7 +27,7 @@ export const usePerson = ({ url }: UsePersonArgs) => {
         } catch (e) {
             console.log(e);
         }
-    }, [url]);
+    }, [id]);
 
     useEffect(() => {
         const fetchStarship = async (shipUrls: string[]) => {
