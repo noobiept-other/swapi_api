@@ -1,4 +1,4 @@
-import { Link } from "@mui/material";
+import { Card, Link, Typography } from "@mui/material";
 import { Link as RouterLink, useSearchParams } from "react-router-dom";
 import { useStarShip } from "../hooks/use-star-ship.hook";
 import { constructPersonUrl } from "../utils";
@@ -14,11 +14,16 @@ export const StarShipPage = () => {
     const { pilots, ship } = shipData;
 
     return (
-        <div>
-            <ul>
-                <li>{ship.name}</li>
-                <li>{ship.model}</li>
-            </ul>
+        <Card sx={{ padding: 2 }}>
+            <div>
+                Name:{" "}
+                <Typography display="inline" fontWeight="bold">
+                    {ship.name}
+                </Typography>
+            </div>
+            <div>
+                Model: <Typography display="inline">{ship.model}</Typography>
+            </div>
             <ul>
                 {pilots?.map((pilot) => (
                     <li key={pilot.url}>
@@ -31,6 +36,6 @@ export const StarShipPage = () => {
                     </li>
                 ))}
             </ul>
-        </div>
+        </Card>
     );
 };

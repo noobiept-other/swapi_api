@@ -1,4 +1,4 @@
-import { Link } from "@mui/material";
+import { Card, Link, Typography } from "@mui/material";
 import { Link as RouterLink, useSearchParams } from "react-router-dom";
 import { usePerson } from "../hooks/use-person.hook";
 import { constructStarshipUrl } from "../utils";
@@ -14,8 +14,15 @@ export const PersonPage = () => {
     }
 
     return (
-        <div>
-            {person.name} / {person.height}
+        <Card sx={{ padding: 2 }}>
+            <div>
+                Name:{" "}
+                <Typography display="inline" fontWeight="bold">
+                    {person.name}
+                </Typography>
+            </div>
+            <div>Height: {person.height}</div>
+            <div>Starships:</div>
             <ul>
                 {personData.starships.map((item) => (
                     <li key={item.url}>
@@ -28,6 +35,6 @@ export const PersonPage = () => {
                     </li>
                 ))}
             </ul>
-        </div>
+        </Card>
     );
 };

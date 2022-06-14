@@ -40,7 +40,7 @@ export const HomePage = () => {
                     Next
                 </Button>
             </Stack>
-            <Stack direction={{ xs: "column", sm: "row" }}>
+            <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
                 {persons?.results.map((person) => (
                     <PersonItem key={person.name} info={person} />
                 ))}
